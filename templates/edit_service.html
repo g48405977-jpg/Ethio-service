@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Service</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .current-image {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .current-image img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 9px;
+            background: #087f5b;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #087f5b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>✏️ Edit Service</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label>🛠️ Service Name</label>
+
+            <input
+                type="text"
+                name="service_name"
+                value="{{ service['service_name'] }}"
+                required
+            >
+
+
+            <label>📝 Description</label>
+
+            <textarea
+                name="description"
+                required
+            >{{ service['description'] }}</textarea>
+
+
+            <label>💰 Price</label>
+
+            <input
+                type="text"
+                name="price"
+                value="{{ service['price'] }}"
+            >
+
+
+            <label>📞 Phone</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="{{ service['phone'] }}"
+                required
+            >
+
+
+            <label>📍 Location</label>
+
+            <input
+                type="text"
+                name="location"
+                value="{{ service['location'] }}"
+                required
+            >
+
+
+            {% if service["image"] %}
+
+            <div class="current-image">
+
+                <p>📷 Current Service Photo</p>
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='uploads/' + service['image']
+                    ) }}"
+                    alt="Service Photo"
+                >
+
+            </div>
+
+            {% endif %}
+
+
+            <label>📷 Change Service Photo</label>
+
+            <input
+                type="file"
+                name="service_image"
+                accept="image/*"
+            >
+
+
+            <button type="submit">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+
+        <a
+            class="back"
+            href="/dashboard/{{ service['user_id'] }}"
+        >
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

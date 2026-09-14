@@ -1,0 +1,606 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>{{ user["name"] }} - Ethio Service</title><style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7f9;
+    color: #17202a;
+    padding-bottom: 85px;
+}
+
+/* HEADER */
+
+.header {
+    background: #087f5b;
+    color: white;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.back {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.header h1 {
+    font-size: 21px;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 18px;
+}
+
+/* PROFILE */
+
+.profile {
+    background: white;
+    border-radius: 24px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,.07);
+    margin-bottom: 20px;
+}
+
+.photo {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #e5f7f0;
+}
+
+.avatar {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    background: #e5f7f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 65px;
+}
+
+.profile h2 {
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+.email {
+    color: #667085;
+    margin-top: 6px;
+}
+
+/* RATING */
+
+.rating-box {
+    margin: 18px 0;
+}
+
+.rating-number {
+    font-size: 31px;
+    font-weight: bold;
+    color: #087f5b;
+}
+
+.stars {
+    color: #f5a623;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.review-count {
+    color: #667085;
+    font-size: 13px;
+}
+
+/* CONTACT BUTTONS */
+
+.contact-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.contact {
+    padding: 14px;
+    border-radius: 13px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.call {
+    background: #1976d2;
+}
+
+.whatsapp {
+    background: #16a05d;
+}
+
+/* SECTION */
+
+.section-title {
+    font-size: 21px;
+    margin: 25px 0 14px;
+}
+
+/* SERVICE */
+
+.service {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.06);
+}
+
+.service-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.no-image {
+    height: 150px;
+    background: #e5f7f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 55px;
+}
+
+.service-body {
+    padding: 18px;
+}
+
+.service-name {
+    font-size: 21px;
+    margin-bottom: 9px;
+}
+
+.description {
+    color: #667085;
+    line-height: 1.5;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.info span {
+    background: #f2f4f7;
+    padding: 8px 10px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.service-price {
+    color: #087f5b;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 14px;
+}
+
+/* RATE CARD */
+
+.rate-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 22px;
+}
+
+.rate-card h2 {
+    margin-bottom: 5px;
+}
+
+.rate-card p {
+    color: #667085;
+    margin-bottom: 15px;
+}
+
+input,
+textarea,
+select,
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border-radius: 11px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+button {
+    background: #087f5b;
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+/* REVIEWS */
+
+.review {
+    background: white;
+    border-radius: 18px;
+    padding: 17px;
+    margin-bottom: 12px;
+}
+
+.review-name {
+    font-weight: bold;
+}
+
+.review-stars {
+    color: #f5a623;
+    margin: 7px 0;
+}
+
+.review-text {
+    color: #667085;
+    line-height: 1.5;
+}
+
+/* EMPTY */
+
+.empty {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    color: #667085;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 18px rgba(0,0,0,.10);
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #667085;
+    text-align: center;
+    font-size: 11px;
+}
+
+.bottom-nav .icon {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.bottom-nav .active {
+    color: #087f5b;
+    font-weight: bold;
+}
+
+</style></head><body><!-- HEADER --><header class="header"><a class="back" href="/search">
+    ‹
+</a>
+
+<h1>
+    Provider Profile
+</h1>
+
+</header><main class="container"><!-- PROFILE --><section class="profile">{% if user["photo"] %}
+
+    <img
+        class="photo"
+        src="/static/uploads/{{ user['photo'] }}"
+        alt="{{ user['name'] }}"
+    >
+
+{% else %}
+
+    <div class="avatar">
+        👤
+    </div>
+
+{% endif %}
+
+
+<h2>
+    {{ user["name"] }}
+</h2>
+
+<p class="email">
+    {{ user["email"] }}
+</p>
+
+
+<div class="rating-box">
+
+    <div class="rating-number">
+        {{ average }}/5
+    </div>
+
+    <div class="stars">
+
+        {% if average >= 1 %}⭐{% endif %}
+        {% if average >= 2 %}⭐{% endif %}
+        {% if average >= 3 %}⭐{% endif %}
+        {% if average >= 4 %}⭐{% endif %}
+        {% if average >= 5 %}⭐{% endif %}
+
+    </div>
+
+    <div class="review-count">
+        {{ ratings|length }} customer review(s)
+    </div>
+
+</div>
+
+
+{% if phone %}
+
+<div class="contact-buttons">
+
+    <a
+        class="contact call"
+        href="tel:{{ phone }}"
+    >
+        📞 Call
+    </a>
+
+    <a
+        class="contact whatsapp"
+        href="https://wa.me/{{ whatsapp_phone }}"
+        target="_blank"
+    >
+        💬 WhatsApp
+    </a>
+
+</div>
+
+{% endif %}
+
+</section><!-- SERVICES --><h2 class="section-title">
+    🛠️ Services
+</h2>{% if services %}
+
+{% for service in services %}
+
+<article class="service">
+
+    {% if service["image"] %}
+
+        <img
+            class="service-image"
+            src="/static/uploads/{{ service['image'] }}"
+            alt="{{ service['service_name'] }}"
+        >
+
+    {% else %}
+
+        <div class="no-image">
+            🛠️
+        </div>
+
+    {% endif %}
+
+
+    <div class="service-body">
+
+        <h2 class="service-name">
+            {{ service["service_name"] }}
+        </h2>
+
+        <p class="description">
+
+            {{ service["description"] or
+               "Professional local service." }}
+
+        </p>
+
+
+        <div class="info">
+
+            <span>
+                📍 {{ service["location"] or
+                "Location not provided" }}
+            </span>
+
+            {% if service["phone"] %}
+
+            <span>
+                📞 {{ service["phone"] }}
+            </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="service-price">
+
+            {% if service["price"] %}
+
+                💰 {{ service["price"] }}
+
+            {% else %}
+
+                💰 Contact provider
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</article>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+    No services available yet.
+</div>
+
+{% endif %}
+
+<!-- RATING --><section class="rate-card"><h2>
+    ⭐ Rate this Provider
+</h2>
+
+<p>
+    Share your experience with other customers.
+</p>
+
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="customer_name"
+        placeholder="Your name"
+        required
+    >
+
+
+    <select name="rating">
+
+        <option value="5">
+            ⭐⭐⭐⭐⭐ Excellent
+        </option>
+
+        <option value="4">
+            ⭐⭐⭐⭐ Very Good
+        </option>
+
+        <option value="3">
+            ⭐⭐⭐ Good
+        </option>
+
+        <option value="2">
+            ⭐⭐ Not Good
+        </option>
+
+        <option value="1">
+            ⭐ Bad
+        </option>
+
+    </select>
+
+
+    <textarea
+        name="review"
+        rows="4"
+        placeholder="Write your review..."
+    ></textarea>
+
+
+    <button type="submit">
+        ⭐ Submit Review
+    </button>
+
+</form>
+
+</section><!-- REVIEWS --><h2 class="section-title">
+    💬 Customer Reviews
+</h2>{% if ratings %}
+
+{% for review in ratings %}
+
+<div class="review">
+
+    <div class="review-name">
+        👤 {{ review["customer_name"] }}
+    </div>
+
+
+    <div class="review-stars">
+
+        {% for i in range(review["rating"]) %}
+            ⭐
+        {% endfor %}
+
+    </div>
+
+
+    <p class="review-text">
+
+        {{ review["review"] or
+           "Customer left no comment." }}
+
+    </p>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+    💬 No reviews yet.
+
+    <br><br>
+
+    Be the first customer to leave a review!
+
+</div>
+
+{% endif %}
+
+</main><!-- BOTTOM NAV --><nav class="bottom-nav"><a href="/">
+    <span class="icon">🏠</span>
+    Home
+</a>
+
+<a href="/search">
+    <span class="icon">🔍</span>
+    Search
+</a>
+
+<a href="/register">
+    <span class="icon">➕</span>
+    Join
+</a>
+
+<a class="active" href="/login">
+    <span class="icon">👤</span>
+    Account
+</a>
+
+</nav></body>
+</html>
+
+
+
+
+
+
+
+
+

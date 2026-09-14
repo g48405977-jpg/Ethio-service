@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+        }
+
+        .header {
+            background: #087f5b;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .avatar {
+            font-size: 70px;
+        }
+
+        .menu {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu a {
+            display: block;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #222;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .menu a:hover {
+            background: #e9f7f2;
+        }
+
+        .search {
+            background: #1971c2 !important;
+            color: white !important;
+            text-align: center;
+        }
+
+        .logout {
+            background: #d63031 !important;
+            color: white !important;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🇪🇹 Ethio Service Finder</h1>
+        <p>Customer Dashboard</p>
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+
+            {% if user["photo"] %}
+
+                <img
+                    class="profile-photo"
+                    src="{{ url_for(
+                        'static',
+                        filename='uploads/' + user['photo']
+                    ) }}"
+                    alt="Profile Photo"
+                >
+
+            {% else %}
+
+                <div class="avatar">👤</div>
+
+            {% endif %}
+
+            <h2>
+                Welcome, {{ user["name"] }} 👋
+            </h2>
+
+            <p>
+                {{ user["email"] }}
+            </p>
+
+            <p>
+                Find trusted services near you.
+            </p>
+
+        </div>
+
+
+        <div class="menu">
+
+            <a
+                href="/search"
+                class="search"
+            >
+                🔍 Search Services
+            </a>
+
+            <a href="/search">
+                🛠️ Browse All Services
+            </a>
+
+            <a href="/search?q=Phone">
+                📱 Phone Repair
+            </a>
+
+            <a href="/search?q=Android">
+                🤖 Technology Services
+            </a>
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+            <a
+                href="/login"
+                class="logout"
+            >
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

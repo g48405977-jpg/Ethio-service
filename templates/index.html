@@ -1,0 +1,445 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ethio Service Finder</title><style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7f9;
+    color: #17202a;
+    padding-bottom: 80px;
+}
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(135deg, #087f5b, #0b9b70);
+    color: white;
+    padding: 25px 20px 30px;
+    border-radius: 0 0 28px 28px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.login {
+    background: rgba(255,255,255,.18);
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 12px;
+}
+
+/* HERO */
+
+.hero {
+    margin-top: 25px;
+}
+
+.hero h1 {
+    font-size: 30px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    opacity: .9;
+    margin-bottom: 20px;
+}
+
+/* SEARCH */
+
+.search-box {
+    background: white;
+    padding: 7px;
+    border-radius: 16px;
+    display: flex;
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 13px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.search-box button {
+    border: none;
+    background: #087f5b;
+    color: white;
+    border-radius: 12px;
+    padding: 0 17px;
+    font-size: 18px;
+}
+
+/* CONTENT */
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 22px 17px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    font-size: 21px;
+}
+
+.section-title a {
+    color: #087f5b;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* CATEGORIES */
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.category {
+    background: white;
+    padding: 16px 7px;
+    border-radius: 17px;
+    text-align: center;
+    text-decoration: none;
+    color: #17202a;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.category-icon {
+    font-size: 29px;
+    margin-bottom: 8px;
+}
+
+.category span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* FEATURE CARD */
+
+.feature {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.07);
+}
+
+.feature h3 {
+    margin-bottom: 8px;
+}
+
+.feature p {
+    color: #667085;
+    line-height: 1.5;
+}
+
+.feature-button {
+    display: inline-block;
+    margin-top: 15px;
+    background: #087f5b;
+    color: white;
+    text-decoration: none;
+    padding: 12px 17px;
+    border-radius: 12px;
+}
+
+/* HOW IT WORKS */
+
+.steps {
+    display: grid;
+    gap: 12px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.step-number {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e5f7f0;
+    color: #087f5b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 18px rgba(0,0,0,.10);
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #667085;
+    text-align: center;
+    font-size: 11px;
+}
+
+.bottom-nav .icon {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.bottom-nav .active {
+    color: #087f5b;
+    font-weight: bold;
+}
+
+/* DESKTOP */
+
+@media (min-width: 700px) {
+
+    .header {
+        padding-left: calc((100% - 660px) / 2);
+        padding-right: calc((100% - 660px) / 2);
+    }
+
+    .categories {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+}
+
+</style></head><body><!-- HEADER --><header class="header"><div class="top">
+
+    <div class="logo">
+        🇪🇹 Ethio Service
+    </div>
+
+    <a class="login" href="/login">
+        Login
+    </a>
+
+</div>
+
+<div class="hero">
+
+    <h1>
+        Find trusted services near you
+    </h1>
+
+    <p>
+        Connect with local service providers in Ethiopia.
+    </p>
+
+    <form class="search-box" action="/search">
+
+        <input
+            type="search"
+            name="q"
+            placeholder="What service do you need?"
+        >
+
+        <button type="submit">
+            🔍
+        </button>
+
+    </form>
+
+</div>
+
+</header><main class="container"><!-- CATEGORIES -->
+
+<div class="section-title">
+
+    <h2>
+        Categories
+    </h2>
+
+    <a href="/search">
+        See all
+    </a>
+
+</div>
+
+<div class="categories">
+
+    <a class="category" href="/search?q=Phone">
+        <div class="category-icon">📱</div>
+        <span>Phone</span>
+    </a>
+
+    <a class="category" href="/search?q=Computer">
+        <div class="category-icon">💻</div>
+        <span>Computer</span>
+    </a>
+
+    <a class="category" href="/search?q=Home">
+        <div class="category-icon">🏠</div>
+        <span>Home</span>
+    </a>
+
+    <a class="category" href="/search?q=Car">
+        <div class="category-icon">🚗</div>
+        <span>Car</span>
+    </a>
+
+    <a class="category" href="/search?q=Beauty">
+        <div class="category-icon">💇</div>
+        <span>Beauty</span>
+    </a>
+
+    <a class="category" href="/search?q=Repair">
+        <div class="category-icon">🔧</div>
+        <span>Repair</span>
+    </a>
+
+</div>
+
+
+<!-- FEATURE -->
+
+<div class="section-title">
+
+    <h2>
+        Find a professional
+    </h2>
+
+</div>
+
+<div class="feature">
+
+    <h3>
+        🛠️ Need a service?
+    </h3>
+
+    <p>
+        Search for trusted local professionals,
+        compare services and contact providers
+        directly.
+    </p>
+
+    <a
+        class="feature-button"
+        href="/search"
+    >
+        Explore Services →
+    </a>
+
+</div>
+
+
+<!-- HOW IT WORKS -->
+
+<div class="section-title">
+
+    <h2>
+        How it works
+    </h2>
+
+</div>
+
+<div class="steps">
+
+    <div class="step">
+
+        <div class="step-number">
+            1
+        </div>
+
+        <div>
+            <strong>Search</strong>
+            <p>Find the service you need.</p>
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">
+            2
+        </div>
+
+        <div>
+            <strong>Choose</strong>
+            <p>View provider profiles and ratings.</p>
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">
+            3
+        </div>
+
+        <div>
+            <strong>Contact</strong>
+            <p>Call or WhatsApp the provider.</p>
+        </div>
+
+    </div>
+
+</div>
+
+</main><!-- BOTTOM NAVIGATION --><nav class="bottom-nav"><a class="active" href="/">
+    <span class="icon">🏠</span>
+    Home
+</a>
+
+<a href="/search">
+    <span class="icon">🔍</span>
+    Search
+</a>
+
+<a href="/register">
+    <span class="icon">➕</span>
+    Join
+</a>
+
+<a href="/login">
+    <span class="icon">👤</span>
+    Account
+</a>
+
+</nav></body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Search Services - Ethio Service</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7f5;
+    color:#17231d;
+    padding-bottom:90px;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#087f3e,#0aa653);
+    color:white;
+    padding:22px 18px 28px;
+    border-radius:0 0 28px 28px;
+}
+
+.top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffffff22;
+    color:white;
+    text-decoration:none;
+    border-radius:50%;
+    font-size:22px;
+}
+
+.header h1{
+    margin:0;
+    font-size:23px;
+}
+
+.header p{
+    margin:7px 0 0;
+    opacity:.9;
+}
+
+/* SEARCH */
+
+.search-box{
+    margin-top:20px;
+    background:white;
+    padding:5px;
+    border-radius:15px;
+    display:flex;
+    box-shadow:0 5px 18px #0002;
+}
+
+.search-box input{
+    flex:1;
+    border:0;
+    outline:0;
+    padding:13px;
+    font-size:15px;
+    border-radius:12px;
+}
+
+.search-box button{
+    border:0;
+    background:#087f3e;
+    color:white;
+    padding:0 18px;
+    border-radius:12px;
+    font-size:18px;
+}
+
+/* CONTENT */
+
+.container{
+    padding:18px;
+    max-width:700px;
+    margin:auto;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:4px 0 12px;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex-shrink:0;
+    background:white;
+    border:1px solid #e4e9e6;
+    padding:11px 15px;
+    border-radius:30px;
+    text-decoration:none;
+    color:#17231d;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.category.active{
+    background:#087f3e;
+    color:white;
+    border-color:#087f3e;
+}
+
+/* RESULT HEADER */
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:12px 0;
+}
+
+.result-header h2{
+    margin:0;
+    font-size:20px;
+}
+
+.count{
+    background:#e0f4e8;
+    color:#087f3e;
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* SERVICE CARD */
+
+.card{
+    background:white;
+    margin:14px 0;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 4px 16px #0000000d;
+    border:1px solid #edf1ee;
+}
+
+.service-top{
+    display:flex;
+    gap:13px;
+}
+
+.service-image{
+    width:85px;
+    height:85px;
+    object-fit:cover;
+    border-radius:15px;
+    background:#e8efeb;
+    flex-shrink:0;
+}
+
+.no-image{
+    width:85px;
+    height:85px;
+    border-radius:15px;
+    background:#e8efeb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    flex-shrink:0;
+}
+
+.info{
+    flex:1;
+}
+
+.info h3{
+    margin:2px 0 7px;
+    font-size:18px;
+}
+
+.provider{
+    color:#087f3e;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.description{
+    color:#68736d;
+    line-height:1.5;
+    font-size:14px;
+    margin:10px 0;
+}
+
+.details{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:10px 0;
+}
+
+.detail{
+    background:#f3f7f4;
+    padding:8px 10px;
+    border-radius:9px;
+    font-size:13px;
+}
+
+.price{
+    color:#087f3e;
+    font-weight:bold;
+    font-size:17px;
+}
+
+/* BUTTON */
+
+.profile-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    background:#087f3e;
+    color:white;
+    padding:13px;
+    border-radius:12px;
+    font-weight:bold;
+    margin-top:13px;
+}
+
+.profile-btn:active{
+    transform:scale(.98);
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    background:white;
+    padding:35px 20px;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+.empty-icon{
+    font-size:50px;
+}
+
+.empty h3{
+    margin:12px 0 5px;
+}
+
+.empty p{
+    color:#68736d;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    background:white;
+    border-top:1px solid #e5e9e6;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:100;
+    box-shadow:0 -5px 20px #0001;
+}
+
+.nav-item{
+    text-decoration:none;
+    color:#68736d;
+    text-align:center;
+    font-size:12px;
+}
+
+.nav-item span{
+    display:block;
+    font-size:22px;
+    margin-bottom:3px;
+}
+
+.nav-item.active{
+    color:#087f3e;
+    font-weight:bold;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+    .header{
+        padding-left:calc((100% - 700px)/2 + 18px);
+        padding-right:calc((100% - 700px)/2 + 18px);
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="top">
+
+        <a href="/" class="back">
+            ←
+        </a>
+
+        <div>
+            <h1>Find Services</h1>
+            <p>Trusted professionals in Ethiopia 🇪🇹</p>
+        </div>
+
+    </div>
+
+
+    <form
+        class="search-box"
+        method="GET"
+        action="/search"
+    >
+
+        <input
+            type="text"
+            name="q"
+            value="{{ q }}"
+            placeholder="What service do you need?"
+            autocomplete="off"
+        >
+
+        <button type="submit">
+            🔍
+        </button>
+
+    </form>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- CATEGORIES -->
+
+<div class="categories">
+
+    <a
+        href="/search"
+        class="category {% if not q %}active{% endif %}"
+    >
+        All
+    </a>
+
+    <a
+        href="/search?q=Phone"
+        class="category"
+    >
+        📱 Phone
+    </a>
+
+    <a
+        href="/search?q=Computer"
+        class="category"
+    >
+        💻 Computer
+    </a>
+
+    <a
+        href="/search?q=Home"
+        class="category"
+    >
+        🏠 Home
+    </a>
+
+    <a
+        href="/search?q=Car"
+        class="category"
+    >
+        🚗 Car
+    </a>
+
+    <a
+        href="/search?q=Beauty"
+        class="category"
+    >
+        💇 Beauty
+    </a>
+
+    <a
+        href="/search?q=Repair"
+        class="category"
+    >
+        🔧 Repair
+    </a>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="result-header">
+
+    <h2>
+        {% if q %}
+            Results for "{{ q }}"
+        {% else %}
+            All Services
+        {% endif %}
+    </h2>
+
+    <div class="count">
+        {{ services|length }} found
+    </div>
+
+</div>
+
+
+<!-- SERVICE LIST -->
+
+{% for service in services %}
+
+<div class="card">
+
+    <div class="service-top">
+
+        {% if service["image"] %}
+
+        <img
+            class="service-image"
+            src="/static/uploads/{{ service['image'] }}"
+            alt="{{ service['service_name'] }}"
+        >
+
+        {% else %}
+
+        <div class="no-image">
+            🛠️
+        </div>
+
+        {% endif %}
+
+
+        <div class="info">
+
+            <h3>
+                {{ service["service_name"] }}
+            </h3>
+
+            <div class="provider">
+                👤 {{ service["provider_name"] }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if service["description"] %}
+
+    <div class="description">
+        {{ service["description"] }}
+    </div>
+
+    {% endif %}
+
+
+    <div class="details">
+
+        {% if service["location"] %}
+
+        <div class="detail">
+            📍 {{ service["location"] }}
+        </div>
+
+        {% endif %}
+
+
+        {% if service["price"] %}
+
+        <div class="detail price">
+            💰 {{ service["price"] }}
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <a
+        href="/provider/{{ service['user_id'] }}"
+        class="profile-btn"
+    >
+        View Provider Profile →
+    </a>
+
+</div>
+
+
+{% else %}
+
+
+<!-- EMPTY -->
+
+<div class="empty">
+
+    <div class="empty-icon">
+        🔎
+    </div>
+
+    <h3>
+        No services found
+    </h3>
+
+    <p>
+        Try another service name or category.
+    </p>
+
+    <a
+        href="/search"
+        class="profile-btn"
+    >
+        View All Services
+    </a>
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+    <a
+        href="/"
+        class="nav-item"
+    >
+        <span>🏠</span>
+        Home
+    </a>
+
+
+    <a
+        href="/search"
+        class="nav-item active"
+    >
+        <span>🔍</span>
+        Search
+    </a>
+
+
+    <a
+        href="/register"
+        class="nav-item"
+    >
+        <span>➕</span>
+        Join
+    </a>
+
+
+    <a
+        href="/login"
+        class="nav-item"
+    >
+        <span>👤</span>
+        Account
+    </a>
+
+</div>
+
+
+</body>
+</html>
