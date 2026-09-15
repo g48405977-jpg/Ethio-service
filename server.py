@@ -1,5 +1,5 @@
 
-from flask import Flask, request, redirect, render_template, render_template_string
+from flask import Flask, request, redirect,session,render_template, render_template_string
 import sqlite3
 import os
 import uuid
@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "ethio-service-dev-key")
 
 DATABASE = "service.db"
 UPLOAD_FOLDER = "static/uploads"
@@ -301,13 +302,8 @@ def login():
 
     if request.method == "POST":
 
-        email = request.form.get(
-            "email", ""
-        ).strip()
-
-        password = request.form.get(
-            "password", ""
-        )
+        email = request.form.get("email", "").strip()
+        password = request.form.get("password", "")
 
         db = get_db()
 
@@ -322,128 +318,48 @@ def login():
         if not user:
             return "Invalid email or password"
 
-        if not check_password_hash(
-            user["password"],
-            password
-        ):
+        if not check_password_hash(user["password"], password):
             return "Invalid email or password"
 
+        session["user_id"] = user["id"]
+        session["user_type"] = user["user_type"]
+        session.permanent = True
+
         if user["user_type"] == "provider":
+            return redirect(f"/dashboard/{user['id']}")
 
-            return redirect(
-                f"/dashboard/{user['id']}"
-            )
-
-        return redirect(
-            f"/customer/{user['id']}"
-        )
+        return redirect(f"/customer/{user['id']}")
 
     return render_template_string("""
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
-
-<style>
-
-body{
-    font-family:Arial;
-    background:#f3f7f4;
-    margin:0;
-    padding:25px;
-}
-
-.box{
-    max-width:450px;
-    margin:60px auto;
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 20px #0002;
-}
-
-h1{
-    color:#087f3e;
-}
-
-input{
-    width:100%;
-    box-sizing:border-box;
-    padding:14px;
-    margin:8px 0;
-    border:1px solid #ddd;
-    border-radius:10px;
-}
-
-button{
-    width:100%;
-    padding:14px;
-    background:#087f3e;
-    color:white;
-    border:0;
-    border-radius:10px;
-    font-size:16px;
-}
-
-a{
-    color:#087f3e;
-}
-
-</style>
-
 </head>
-
 <body>
-
-<div class="box">
-
-<h1>🇪🇹 Welcome Back</h1>
+<h1>🇪🇹 Ethio Service Finder</h1>
+<h2>🔐 Login</h2>
 
 <form method="POST">
+    <label>Email:</label><br>
+    <input type="email" name="email" required>
+    <br><br>
 
-<input
-name="email"
-type="email"
-placeholder="Email"
-required
->
+    <label>Password:</label><br>
+    <input type="password" name="password" required>
+    <br><br>
 
-<input
-name="password"
-type="password"
-placeholder="Password"
-required
->
-
-<button>
-Login
-</button>
-
+    <button type="submit">Login</button>
 </form>
 
-<p>
-Don't have account?
-<a href="/register">
-Register
-</a>
-</p>
-
-</div>
-
+<br>
+<a href="/register">Create an account</a>
+<br><br>
+<a href="/">🏠 Home</a>
 </body>
-
 </html>
 """)
-
-
-# =========================
-# CUSTOMER DASHBOARD
-# =========================
 
 @app.route("/customer/<int:user_id>")
 def customer_dashboard(user_id):
